@@ -1,0 +1,8 @@
+digraph {
+	dpi=75 size="12,12"
+	0 [label="Smoking <= 0.0" fillcolor=lightgray shape=ellipse style=filled]
+	1 [label="Leaf: 0" fillcolor=lightblue shape=box style=filled]
+	0 -> 2 [label=Yes]
+	4 [label="Leaf: 1" fillcolor=lightblue shape=box style=filled]
+	0 -> 5 [label=No]
+}
