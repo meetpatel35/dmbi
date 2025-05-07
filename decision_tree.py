@@ -147,6 +147,63 @@
 
 
 
+
+
+#another one
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.preprocessing import LabelEncoder
+import matplotlib.pyplot as plt
+
+# Modified Dataset
+data = {
+    "Order_Value": [400, 600, 550, 200, 300, 250, 700, 100, 350, 480, 150, 670],
+    "Order_History_Count": [2, 10, 7, 5, 1, 9, 6, 3, 4, 12, 1, 8],
+    "Image_Proof_Submitted": ['Yes', 'No', 'Yes', 'No', 'No', 'Yes', 'No', 'Yes', 'Yes', 'No', 'No', 'Yes'],
+    "Refund_Requested": ['no', 'Yes', 'Yes', 'no', 'Yes', 'no', 'Yes', 'Yes', 'no', 'Yes', 'Yes', 'no'],
+    "Is_Fraud": ['no', 'yes', 'no', 'yes', 'yes', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes']
+}
+
+df = pd.DataFrame(data)
+
+# Label encode categorical features
+le = LabelEncoder()
+df['Image_Proof_Submitted'] = le.fit_transform(df['Image_Proof_Submitted'])
+df['Refund_Requested'] = le.fit_transform(df['Refund_Requested'])
+df['Is_Fraud'] = le.fit_transform(df['Is_Fraud'])  # yes = 1, no = 0
+
+# Features and target
+X = df[['Order_Value', 'Order_History_Count', 'Image_Proof_Submitted', 'Refund_Requested']]
+y = df['Is_Fraud']
+
+# Train the Decision Tree with larger depth
+clf = DecisionTreeClassifier(criterion="entropy", max_depth=6, random_state=0)
+clf.fit(X, y)
+
+# Plot the tree
+plt.figure(figsize=(18, 10))
+plot_tree(clf, feature_names=X.columns, class_names=["No Fraud", "Fraud"], filled=True)
+plt.title("Multi-Feature Decision Tree for Fraud Detection")
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # import numpy as np
 # import pandas as pd
 # from graphviz import Digraph
